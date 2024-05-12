@@ -629,11 +629,6 @@ class CssPrinter extends Visitor {
         var previous = expressions[i - 1];
         if (previous is OperatorComma || previous is OperatorSlash) {
           emit(_sp);
-        } else if (previous is PercentageTerm &&
-            expression is PercentageTerm &&
-            _isInKeyframes) {
-          emit(',');
-          emit(_sp);
         } else {
           emit(' ');
         }

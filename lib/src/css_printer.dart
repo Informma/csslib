@@ -545,6 +545,11 @@ class CssPrinter extends Visitor {
   }
 
   @override
+  void visitLineHeightTerm(LineHeightTerm node) {
+    emit(node.toString());
+  }
+
+  @override
   void visitFunctionTerm(FunctionTerm node) {
     // TODO(terry): Optimize rgb to a hexcolor.
     emit('${node.text}(');
@@ -623,6 +628,11 @@ class CssPrinter extends Visitor {
         // expressions and can't be collapsed.
         var previous = expressions[i - 1];
         if (previous is OperatorComma || previous is OperatorSlash) {
+          emit(_sp);
+        } else if (previous is PercentageTerm &&
+            expression is PercentageTerm &&
+            _isInKeyframes) {
+          emit(',');
           emit(_sp);
         } else {
           emit(' ');

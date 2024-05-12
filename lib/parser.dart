@@ -2467,6 +2467,11 @@ class _Parser {
         term = ViewportTerm(value, t.text, span, unitType);
         _next(); // Skip the unit
         break;
+      case TokenKind.UNIT_LH:
+      case TokenKind.UNIT_RLH:
+        term = LineHeightTerm(value, t.text, span, unitType);
+        _next(); // Skip the unit
+        break;
       default:
         if (value != null) {
           if (value is Identifier) {
